@@ -41,7 +41,7 @@ const deleteArticle = (req, res, next) => {
   NewsArticle.findById(articleId)
     .orFail(() => new NotFoundError("Article not found"))
     .then((article) => {
-      if (article.author.toString() !== userId) {
+      if (article.owner.toString() !== userId) {
         throw new ForbiddenError("You are not allowed to delete this article");
       }
       return NewsArticle.findByIdAndDelete(articleId);

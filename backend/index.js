@@ -5,12 +5,12 @@ require("dotenv").config();
 const { errors } = require("celebrate");
 const helmet = require("helmet");
 const rateLimiter = require("./middlewares/rateLimiter");
+const { MONGODB_URI } = require("./utils/config");
 
 const errorHandler = require("./middlewares/error-handler");
 const { requestLogger, errorLogger } = require("./middlewares/logger");
 
-const { MONGODB_URI = "mongodb://localhost:27017/newsexplorer_db" } =
-  process.env;
+const router = require("./routes");
 
 const { PORT = 3001 } = process.env;
 
@@ -28,9 +28,6 @@ mongoose
     console.log("Connected to DB");
   })
   .catch((e) => console.error("DB error", e));
-
-const router = require("./routes");
-const limiter = require("./middlewares/rateLimiter");
 
 app.use(express.json());
 app.use(cors());
