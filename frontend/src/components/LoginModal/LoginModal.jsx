@@ -1,17 +1,22 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import "../../blocks/ModalWithForm.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 
 const LoginModal = ({ onClose, handleLogin, isOpen, onSignUpClick }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { handleChange, values, errors, isValid, resetForm } =
+    useFormWithValidation({ email: "", password: "" });
+
+  useEffect(() => {
+    if (!isOpen) {
+      resetForm();
+    }
+  }, [isOpen, resetForm]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin({ email, password });
+    handleLogin({ email: values.email, password: values.password });
   };
-
-  const isValid = email.trim() !== "" && password.trim() !== "";
 
   return (
     <ModalWithForm
@@ -24,29 +29,27 @@ const LoginModal = ({ onClose, handleLogin, isOpen, onSignUpClick }) => {
       <label className="modal__label">
         Email
         <input
+          name="email"
           className="modal__input"
           type="email"
           placeholder="Email"
-          value={email}
-          onChange={(event) => {
-            const inputText = event.target.value;
-            setEmail(inputText);
-          }}
+          value={values.email || ""}
+          onChange={handleChange}
         />
+        <span>{errors.email}</span>
       </label>
 
       <label className="modal__label">
         Password
         <input
+          name="password"
           className="modal__input"
           type="password"
           placeholder="Password"
-          value={password}
-          onChange={(event) => {
-            const inputText = event.target.value;
-            setPassword(inputText);
-          }}
+          value={values.password || ""}
+          onChange={handleChange}
         />
+        <span>{errors.password}</span>
       </label>
 
       <div className="modal__button-container">
@@ -55,6 +58,7 @@ const LoginModal = ({ onClose, handleLogin, isOpen, onSignUpClick }) => {
           className={`modal__primary-btn ${
             !isValid ? "modal__primary-btn_disabled" : ""
           }`}
+          disabled={!isValid}
         >
           Sign in
         </button>
@@ -69,4 +73,5 @@ const LoginModal = ({ onClose, handleLogin, isOpen, onSignUpClick }) => {
     </ModalWithForm>
   );
 };
+
 export default LoginModal;

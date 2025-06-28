@@ -1,20 +1,27 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import "../../blocks/RegisterModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 
 const RegisterModal = ({ onClose, onRegister, isOpen, onLogInClick }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { handleChange, values, errors, isValid, resetForm } =
+    useFormWithValidation({ name: "", email: "", password: "" });
 
-  const isValid =
-    name.trim() !== "" && email.trim() !== "" && password.trim() !== "";
+  useEffect(() => {
+    if (!isOpen) {
+      resetForm();
+    }
+  }, [isOpen, resetForm]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(onRegister);
-    onRegister({ name, email, password });
+    onRegister({
+      name: values.name,
+      email: values.email,
+      password: values.password,
+    });
   };
+
   return (
     <ModalWithForm
       isOpen={isOpen}
@@ -28,34 +35,43 @@ const RegisterModal = ({ onClose, onRegister, isOpen, onLogInClick }) => {
         <input
           className="modal__input"
           type="email"
+          name="email"
           placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={values.email}
+          onChange={handleChange}
           required
         />
+        <span>{errors.email}</span>
       </label>
+
       <label className="modal__label">
         Password
         <input
           className="modal__input"
           type="password"
+          name="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={values.password}
+          onChange={handleChange}
           required
         />
+        <span>{errors.password}</span>
       </label>
+
       <label className="modal__label">
         Name
         <input
           className="modal__input"
-          type="name"
+          type="text"
+          name="name"
           placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={values.name}
+          onChange={handleChange}
           required
         />
+        <span>{errors.name}</span>
       </label>
+
       <div className="modal__button-container">
         <button
           type="submit"
@@ -76,4 +92,5 @@ const RegisterModal = ({ onClose, onRegister, isOpen, onLogInClick }) => {
     </ModalWithForm>
   );
 };
+
 export default RegisterModal;

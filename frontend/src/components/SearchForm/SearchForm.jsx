@@ -18,6 +18,7 @@ function SearchForm({ onSearch }) {
         name="name"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
+        required
       />
       <button type="submit" className="search-bar__btn">
         Search
