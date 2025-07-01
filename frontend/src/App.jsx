@@ -36,6 +36,7 @@ function App() {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
     setUser(null);
+    setSavedCards([]);
   };
   useEffect(() => {
     const token = localStorage.getItem("jwt");

@@ -25,26 +25,3 @@ export function useFormWithValidation(defaultValues) {
 
   return { values, handleChange, errors, isValid, resetForm };
 }
-// export function useFormWithValidation(defaultValues = {}) {
-//   const [values, setValues] = React.useState(() => ({ ...defaultValues }));
-//   const [errors, setErrors] = React.useState({});
-//   const [isValid, setIsValid] = React.useState(false);
-
-//   const handleChange = (event) => {
-//     const { name, value } = event.target;
-//     setValues((prev) => ({ ...prev, [name]: value }));
-//     setErrors((prev) => ({ ...prev, [name]: event.target.validationMessage }));
-//     setIsValid(event.target.closest("form").checkValidity());
-//   };
-
-//   const resetForm = React.useCallback(
-//     (newValues = {}, newErrors = {}, newIsValid = false) => {
-//       setValues({ ...defaultValues, ...newValues });
-//       setErrors(newErrors);
-//       setIsValid(newIsValid);
-//     },
-//     [defaultValues]
-//   );
-
-//   return { values, handleChange, errors, isValid, resetForm };
-// }

@@ -1,18 +1,15 @@
 import { APIkey, NEWSAPI_URL, BASE_URL } from "./constants";
 
-// ✅ Checks API response and throws on error
 export function checkResponse(res) {
   return res.ok
     ? res.json()
     : Promise.reject(new Error(`Error: ${res.status}`));
 }
 
-// ✅ Utility function for fetching
 function request(url, options) {
   return fetch(url, options).then(checkResponse);
 }
 
-// ✅ Checks JWT token for user
 export const checkToken = (token) =>
   fetch(`${BASE_URL}/users/me`, {
     headers: {
@@ -20,7 +17,6 @@ export const checkToken = (token) =>
     },
   }).then(checkResponse);
 
-// ✅ NewsAPI request (no issues)
 export function getNewsArticles(searchTerm) {
   console.log("Fetching from:", NEWSAPI_URL);
   console.log("API Key:", APIkey);
@@ -33,7 +29,6 @@ export function getNewsArticles(searchTerm) {
   });
 }
 
-// ✅ Delete a saved article
 export function deleteArticle(articleId, token) {
   console.log({ articleId, token });
 
@@ -46,7 +41,6 @@ export function deleteArticle(articleId, token) {
   }).then(checkResponse);
 }
 
-// ✅ Get all saved articles
 export function getArticles(token) {
   return fetch(`${BASE_URL}/articles`, {
     method: "GET",
@@ -56,7 +50,6 @@ export function getArticles(token) {
   }).then(checkResponse);
 }
 
-// ✅ Save a news article
 export function saveArticle(article, token) {
   console.log({ article, token });
 
@@ -86,7 +79,6 @@ export const loginUser = ({ email, password }) => {
   }).then(checkResponse);
 };
 
-// ✅ Register user
 export function registerUser(userData) {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
