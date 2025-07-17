@@ -7,6 +7,8 @@ const RegisterModal = ({ onClose, onRegister, isOpen, onLogInClick }) => {
   const { handleChange, values, errors, isValid, resetForm } =
     useFormWithValidation({ name: "", email: "", password: "" });
 
+  console.log({ values });
+
   useEffect(() => {
     if (!isOpen) {
       resetForm();
