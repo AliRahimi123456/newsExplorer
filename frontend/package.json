@@ -9,7 +9,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "npm run build && scp -r ./dist/* ali_1996rahimiourzgani@newsexplorer.hardsoft.nu:/home/ali_1996rahimiourzgani/frontend-newsExplorer"
+    "deploy": "npm run build && scp -r ./dist/* ali_1996rahimiourzgani@newsexplorer.hardsoft.nu:/home/ali_1996rahimiourzgani/frontend"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",

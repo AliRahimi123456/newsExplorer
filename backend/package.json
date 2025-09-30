@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "deploy": "scp -r ./* ali_1996rahimiourzgani@newsexplorer.hardsoft.nu:/home/ali_1996rahimiourzgani/se_project_express"
   },
   "author": "",
   "license": "ISC",
