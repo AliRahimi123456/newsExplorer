@@ -3,14 +3,24 @@ import { useLocation } from "react-router-dom";
 import CurrentUserContext from "../../utils/context/CurrentUser";
 import "../../blocks/NewsCard.css";
 
-function NewsCard({ item, handleCardSave, handleCardDelete, savedCards }) {
-  const currentUser = useContext(CurrentUserContext);
+function NewsCard({
+  item,
+  handleCardSave,
+  handleCardDelete,
+  savedCards,
+  handleOpenRegisterModal,
+}) {
+  //const currentUser = useContext(CurrentUserContext).currentUser;
+  const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
   const location = useLocation();
   // const [isSaved, setIsSaved] = useState(false);
   const handleSaveClick = () => {
     handleCardSave(item);
     // setIsSaved(true);
   };
+  // const openRegisterModal = () => {
+  //   handleOpenRegisterModal();
+  // }
   const publishedDate = new Date(item.publishedAt || item.createdAt);
   const formattedDate = publishedDate.toLocaleString("en-US", {
     month: "long",
@@ -26,6 +36,19 @@ function NewsCard({ item, handleCardSave, handleCardDelete, savedCards }) {
   console.log({ isSaved, item, savedCards });
 
   const isHome = location.pathname === "/";
+  const handleClick = () => {
+    if (!isLoggedIn) {
+      handleOpenRegisterModal();
+    } else {
+      if (isCardSaved) {
+        handleCardDelete();
+      }
+    }
+  };
+  console.log(handleOpenRegisterModal);
+  console.log(currentUser);
+  console.log(isHome);
+  console.log(savedCards);
   return (
     <li className="newscard">
       {/* <div className="newscard__save-container"></div> */}
@@ -33,6 +56,7 @@ function NewsCard({ item, handleCardSave, handleCardDelete, savedCards }) {
       {location.pathname === "/saved-news" && (
         <div className="newscard__keyword">{item.keyword}</div>
       )}
+
       <div className="newscard__btn-container">
         {!currentUser && isHome && (
           <div className="newscard__text">Sign in to save articles</div>
@@ -49,7 +73,13 @@ function NewsCard({ item, handleCardSave, handleCardDelete, savedCards }) {
               ? "newscard__save-btn_saved"
               : ""
           }`}
-          onClick={isHome ? handleSaveClick : () => handleCardDelete(item)}
+          onClick={
+            !isLoggedIn
+              ? handleOpenRegisterModal
+              : isSaved
+              ? () => handleCardDelete(item)
+              : handleSaveClick
+          }
         ></button>
       </div>
 

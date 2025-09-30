@@ -11,6 +11,8 @@ function Main({
   showSearchResult,
   isLoading,
   savedCards,
+  onSignUpClick,
+  handleCardDelete,
 }) {
   return (
     <>
@@ -27,6 +29,8 @@ function Main({
                   onCardClick={onCardClick}
                   handleCardSave={handleCardSave}
                   savedCards={savedCards}
+                  handleOpenRegisterModal={onSignUpClick}
+                  handleCardDelete={handleCardDelete}
                 />
               ) : (
                 <div className="no-result-message">

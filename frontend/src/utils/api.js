@@ -1,4 +1,4 @@
-import { APIkey, NEWSAPI_URL, BASE_URL } from "./constants";
+import { APIkey, BASE_URL, currentDate, getPreviousWeek } from "./constants";
 
 export function checkResponse(res) {
   return res.ok
@@ -18,15 +18,17 @@ export const checkToken = (token) =>
   }).then(checkResponse);
 
 export function getNewsArticles(searchTerm) {
-  console.log("Fetching from:", NEWSAPI_URL);
   console.log("API Key:", APIkey);
 
-  return request(`${NEWSAPI_URL}/everything?q=${searchTerm}&apiKey=${APIkey}`, {
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-key": APIkey,
-    },
-  });
+  return request(
+    `https://nomoreparties.co/news/v2/everything?q=${searchTerm}}&from=${getPreviousWeek()}&to=${currentDate}&sortBy=publishedAt&apiKey=${APIkey}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": APIkey,
+      },
+    }
+  );
 }
 
 export function deleteArticle(articleId, token) {

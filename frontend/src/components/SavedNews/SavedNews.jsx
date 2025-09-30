@@ -8,6 +8,7 @@ function SavedNews({
   handleCardDelete,
   handleCardClick,
   handleCardSave,
+  onSignUpClick,
 }) {
   const contextValue = useContext(CurrentUserContext);
   const { currentUser } = contextValue;
@@ -59,6 +60,7 @@ function SavedNews({
               handleCardSave={handleCardSave}
               handleCardDelete={handleCardDelete}
               savedCards={savedCards}
+              handleOpenRegisterModal={onSignUpClick}
             />
             // </li>
           ))}

@@ -2,11 +2,19 @@ import { useState } from "react";
 import "../../blocks/NewsCards.css";
 import NewsCard from "../NewsCard/NewsCard";
 
-function NewsCards({ cards, handleCardClick, handleCardSave, savedCards }) {
-  const [visibleCount, setVisiableCount] = useState(3);
+function NewsCards({
+  cards,
+  handleCardClick,
+  handleCardSave,
+  savedCards,
+  handleOpenRegisterModal,
+  isCardSaved,
+  handleCardDelete,
+}) {
+  const [visibleCount, setVisibleCount] = useState(3);
 
   const handleShowMore = () => {
-    setVisiableCount((prev) => prev + 3);
+    setVisibleCount((prev) => prev + 3);
   };
   console.log(cards);
 
@@ -25,6 +33,9 @@ function NewsCards({ cards, handleCardClick, handleCardSave, savedCards }) {
             onCardClick={handleCardClick}
             handleCardSave={handleCardSave}
             savedCards={savedCards}
+            handleOpenRegisterModal={handleOpenRegisterModal}
+            isCardSaved={isCardSaved}
+            handleCardDelete={handleCardDelete}
           />
         ))}
       </ul>

@@ -158,7 +158,7 @@ function App() {
           checkToken(res.token).then((res2) => {
             console.log(res2);
             setUser(res2.data);
-            setActiveModal("");
+            closeActiveModal();
           });
         }
       })
@@ -212,6 +212,8 @@ function App() {
                 showSearchResult={showSearchResult}
                 isLoading={isLoading}
                 savedCards={savedCards}
+                onSignUpClick={onSignUpClick}
+                handleCardDelete={handleCardDelete}
               />
             }
           />

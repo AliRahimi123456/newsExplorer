@@ -3,12 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://newsexplorer.hardsoft.nu",
   "scripts": {
     "dev": "vite --open",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "npm run build &&  scp -r ./dist/* ali_1996rahimiourzgani@wApplication.hardsoft.nu:/home/ali_1996rahimiourzgani/frontend-newsExplorer"
+    "deploy": "npm run build && scp -r ./dist/* ali_1996rahimiourzgani@newsexplorer.hardsoft.nu:/home/ali_1996rahimiourzgani/frontend-newsExplorer"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
