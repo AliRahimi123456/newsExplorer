@@ -28,8 +28,8 @@ const validateCreateArticles = celebrate({
 const validateUserBody = celebrate({
   [Segments.BODY]: Joi.object().keys({
     name: Joi.string().min(4).max(45).messages({
-      "string.empty": 'The "usernanme" field must be filled in',
-      "string.uri": 'The "usernanme" field must be a valid URL',
+      "string.empty": 'The "username" field must be filled in',
+      "string.uri": 'The "username" field must be a valid URL',
     }),
     email: Joi.string().required().email().messages({
       "string.empty": 'The "email" field must be filled in',
