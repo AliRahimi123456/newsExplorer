@@ -49,7 +49,7 @@ const deleteArticle = (req, res, next) => {
     .then(() =>
       res
         .status(HTTP_STATUS_OK)
-        .send({ message: "Article deleted successfully" })
+        .send({ message: "Article deleted successfully" }),
     )
     .catch((error) => {
       if (error.name === "CastError") {
