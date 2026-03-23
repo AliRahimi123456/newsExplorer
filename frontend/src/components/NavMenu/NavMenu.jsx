@@ -5,7 +5,7 @@ import CurrentUserContext from "../../utils/context/CurrentUser";
 import logouticonwhite from "../../assets/logout-white-icon.svg";
 
 function NavMenu({ isOpen, onClose, onSignInClick, handleLogout }) {
-  const currentUsser = useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
   const location = useLocation();
 
   const isHome = location.pathname === "/";
@@ -25,7 +25,7 @@ function NavMenu({ isOpen, onClose, onSignInClick, handleLogout }) {
         >
           Home
         </Link>
-        {currentUsser ? (
+        {currentUser ? (
           <>
             <Link
               to="/saved-news"
